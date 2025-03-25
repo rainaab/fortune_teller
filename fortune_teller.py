@@ -18,9 +18,9 @@ fortune8 = Node("Your mom is HOT!", None, None)
 # node declarations for middle level/children/numbers
 one = Node(1,None, fortune1)
 two = Node(2,fortune2, None)
-three = Node(3, None fortune3)
+three = Node(3, None ,fortune3)
 four = Node(4,fortune4,None)
-five = Node(5,forutne5,None)
+five = Node(5,fortune5,None)
 six = Node(6,None, fortune6)
 seven = Node(7,fortune7, None)
 eight = Node(8,None, fortune8)
@@ -30,4 +30,12 @@ purple = Node("purple", two, three)
 green = Node("green", four, five)
 blue = Node("blue", six, seven)
 
-
+# code to traverse the tree and make sure nodes are properly linked
+def traversePreOrder(node):
+    if Node is None:
+        return
+    print(node.value, end=" "),
+    if node.left != None:
+        traversePreOrder(node.left)
+    if node.right !=None:
+        traversePreOrder(node.right)
