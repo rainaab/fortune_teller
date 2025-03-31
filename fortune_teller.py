@@ -1,4 +1,7 @@
-import random
+#creating error class
+class NotIncludedError(Exception):
+    def __init__(self,value):
+        self.value = value
 
 # using tree nodes to play the old school paper fortune teller game
 
@@ -46,8 +49,85 @@ green.children = [four,five]
 blue = Node("blue")
 blue.children = [six,seven]
 # root node
-root = Node("Start")
+root = Node("Welcome")
 root.children = [pink,purple,green,blue]
+
+
+def odd_even(num):
+    num = num % 2
+    if (num == 0):
+        return even_shuffle
+    else:
+        return odd_shuffle
+  
+
+
+odd_shuffle = [pink.children[0].value,purple.children[0].value,green.children[0].value,blue.children[0].value]
+even_shuffle = [pink.children[1].value,purple.children[1].value,green.children[1].value,blue.children[1].value]
+
+# # intro to game
+print("\n✨Welcome to your future!✨ \n⚠️ Warning: These fortunes are a bit unhinged and have a tiktok brainrot theme. Have fun! ;)\n")
+#listening first round of options
+option = []
+round1 = []
+round2 = []
+for child in root.children:
+    option.append(child.value)
+    print(f'* {child.value}')
+# round 1 game
+print(option)
+while True:
+    try:
+        color = input("Please choose a color! ")
+        if color in option:
+            color=len(color)
+            round1=odd_even(color)
+            break
+        
+        else:
+            raise NotIncludedError("Aht Aht! Please choose a color from the above options, try again!")
+    except NotIncludedError as e:
+        print(e)
+        
+    
+# round 2 game
+while True:
+    round2 = str(input("Please choose a number! "))
+    try:
+        if round2 in round1:
+            num = int(round2)
+            round2= odd_even(num)
+            print(round2)
+            break
+        else:
+            raise NotIncludedError("😳 WOAH! Please choose a number from the above options, try again!")
+    except NotIncludedError as e:
+        print(e)
+    
+#dictionary for conversion into node
+numbers = {"1": one, "2": two, "3": three, "4": four, "5": five, "6": six, "7": seven, "8": eight}
+
+#round 3 game
+while True:
+    round3 = str(input("We are almost there! Pick one last number and your fortune will be revealed! 🔮🎱"))
+    try:
+        if round3  in round2:
+             print(f"\nYour fortune is.... 🥁 \n 💫{numbers[round3].children[0].value}💫")
+             break
+        else:
+            raise NotIncludedError("Aht Aht! Please choose a number from the above options, try again! :)")
+    except NotIncludedError as e:
+        print(e)
+
+
+
+
+print("\nThank you for playing the ✨Fortune Teller✨! I hope your happy :)")
+
+
+
+
+
 
 # code to traverse the tree and make sure nodes are properly linked
 def print_tree(node, level=0):
@@ -55,9 +135,6 @@ def print_tree(node, level=0):
     print(f'{indent} - {node.value}')
     for child in node.children:
         print_tree(child, level + 1)
+        
+# # print_tree(root)
 
-# print("Welcome to your future! Warning: These fortunes are a bit unhinged and have a tiktok brainrot theme. have fun! ;)")
-
-# color = input("Please choose a color! ")
-
-print_tree(root)
